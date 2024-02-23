@@ -10,7 +10,7 @@ function LinesPages() {
 
     async function fetchData() {
         try {
-            const response = await fetch(API_URL + "arrivals/gold");
+            const response = await fetch(API_URL + "arrivals/blue");
             if (!response.ok) {
                 throw Error("Problem in fetching data");
             }
