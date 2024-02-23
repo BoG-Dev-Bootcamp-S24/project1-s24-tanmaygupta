@@ -1,4 +1,4 @@
-import { useState, useEffect } from react;
+import { useState, useEffect } from 'react';
 
 const API_URL = "https://midsem-bootcamp-api.onrender.com/";
 
@@ -22,6 +22,17 @@ function LinesPages() {
             setError(error);
         }
     }
+
+    useEffect( () => {
+        fetchData()
+    }, [])
+
+    return (
+        <div className="lines-page">
+            { error && <p> Error occurred </p>}
+            { data && <p> Data fetched properly </p>}
+        </div>
+    )
 }
 
 export default LinesPages;
