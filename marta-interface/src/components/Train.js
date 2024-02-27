@@ -17,12 +17,11 @@ export default function Train( {train} ) {
     }
 
     return (
-
         <div className={`flex justify-start py-8 ${border} border-2`}>
-            <p className="ml-4 w-10 text-5xl"> M </p>
-            <div className="flex flex-col w-96 ml-16 items-start">
+            <p className="ml-4 w-10 text-5xl font-extrabold"> {train.STATION[0]} </p>
+            <div className="flex flex-col w-96 ml-16 items-start font-semibold">
                 <p> {train.STATION} --{'>'} {train.DESTINATION} </p>
-                <div className="flex flex-row">
+                <div className="flex flex-row font-semibold">
                     <div className="w-16 mr-10"> <p className={`text-white ${background}`}> {train.LINE} </p> </div>
                     {train.DELAY_TIME === "T0S" ? <p className="text-green-500"> On Time </p> : <p className="text-red-500"> Delayed </p>}
                 </div>
