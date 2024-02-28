@@ -6,6 +6,7 @@ export default function TrainsList( {trainsList, stationsList} ) {
 
     const trains = trainsList;
     const [currStation, setCurrStation] = useState(null);
+    const [arriving, setArriving] = useState(false);
 
     if (trains.length === 0) {
         return (
@@ -34,15 +35,28 @@ export default function TrainsList( {trainsList, stationsList} ) {
             console.log(filterTrains);
         }
 
+        if (arriving) {
+            filterTrains = filterTrains.filter((train) => {
+                return train.WAITING_TIME === "Arriving"
+            })
+        }
+
+        const toggleArriving = (() => {
+            setArriving(!arriving);
+        }) 
+
         return (
-            <div className="flex">
-                <Stations stations={stationsList} setCurrStation={setCurrStation}/>
-                <div className="flex-grow">
-                    {
-                        filterTrains.map((train) => {
-                            return ( <Train train={train} /> ) //map to print all unique trains
-                        })
-                    }
+            <div className='flex flex-col'>
+                <button className="" onClick={toggleArriving}> Arriving </button>
+                <div className="flex">
+                    <Stations stations={stationsList} setCurrStation={setCurrStation}/>
+                    <div className="flex-grow">
+                        {
+                            filterTrains.map((train) => {
+                                return ( <Train train={train} /> ) //map to print all unique trains
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         )
