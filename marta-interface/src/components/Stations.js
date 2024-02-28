@@ -1,10 +1,15 @@
-export default function Stations( {stations} ) {
+export default function Stations( {stations, setCurrStation} ) {
+
+    function clicked(station) {
+        setCurrStation(station);
+    }
+
     return (
-        <div className=" text-white bg-slate-800 p-10">
-            <p> All Stations </p>
+        <div className="text-white bg-slate-800 p-10 flex flex-col text-xl leading-8">
+            <button onClick={() => clicked(null)}> All Stations </button>
             {stations.map((station) => {
                 return (
-                    <p className="text-xl "> {station} </p>
+                    <button className="text-xl leading-8" onClick={() => clicked(station)}> {station} </button>
                 )
             })}
         </div>

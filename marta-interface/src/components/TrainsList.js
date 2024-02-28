@@ -1,9 +1,11 @@
+import {useState} from 'react';
 import Stations from "./Stations";
 import Train from "./Train";
 
 export default function TrainsList( {trainsList, stationsList} ) {
 
-    const trains = trainsList
+    const trains = trainsList;
+    const [currStation, setCurrStation] = useState(null);
 
     if (trains.length === 0) {
         return (
@@ -20,14 +22,21 @@ export default function TrainsList( {trainsList, stationsList} ) {
             const key = train.DESTINATION + train.STATION
             lastIndexMap[key] = index;
         })
-        const filterTrains = (trains.filter((train, index) => { //filter to only include latest data
+        let filterTrains = (trains.filter((train, index) => { //filter to only include latest data
             const key = train.DESTINATION + train.STATION
             return lastIndexMap[key] === index
         }))
 
+        if (currStation !== null) {
+            filterTrains = filterTrains.filter((train) => {
+                return train.STATION.includes(currStation.toUpperCase());
+            })
+            console.log(filterTrains);
+        }
+
         return (
             <div className="flex">
-                <Stations stations={stationsList}/>
+                <Stations stations={stationsList} setCurrStation={setCurrStation}/>
                 <div className="flex-grow">
                     {
                         filterTrains.map((train) => {
