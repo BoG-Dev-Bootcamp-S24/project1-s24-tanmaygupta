@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Train from '../components/Train';
 import TrainsList from '../components/TrainsList';
 
 const API_URL = "https://midsem-bootcamp-api.onrender.com/";
@@ -7,17 +6,24 @@ const API_URL = "https://midsem-bootcamp-api.onrender.com/";
 function LinesPages() {
 
     const [data, setData] = useState(null);
+    const [stations, setStations] = useState(null)
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    async function fetchData() {
+    async function fetchTrains(color) {
         try {
-            const response = await fetch(API_URL + "arrivals/gold");
+            let response = await fetch(API_URL + `arrivals/${color}`);
             if (!response.ok) {
                 throw Error("Problem in fetching data");
             }
             const newData = await response.json();
             setData(newData);
+            response = await fetch(API_URL + `stations/${color}`);
+            if (!response.ok) {
+                throw Error("Problem fetching stations");
+            }
+            const newStations = await response.json();
+            setStations(newStations)
             setError(null);
             setLoading(false);
         } catch (error) {
@@ -28,14 +34,14 @@ function LinesPages() {
     }
 
     useEffect( () => {
-        fetchData()
+        fetchTrains("red")
     }, [])
 
     return (
         <div className="lines-page">
             { error && <p> Error occurred </p>}
             { loading && <h1 className='text-2xl font-bold flex p-10'> Loading... </h1>}
-            { data && <TrainsList trainsList={data} />}
+            { data && <TrainsList trainsList={data} stations={stations} />}
         </div>
     )
 }

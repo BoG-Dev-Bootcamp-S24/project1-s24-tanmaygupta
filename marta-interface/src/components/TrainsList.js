@@ -1,6 +1,7 @@
+import Stations from "./Stations";
 import Train from "./Train";
 
-export default function TrainsList( {trainsList} ) {
+export default function TrainsList( {trainsList, stations} ) {
 
     const trains = trainsList
 
@@ -23,8 +24,10 @@ export default function TrainsList( {trainsList} ) {
             const key = train.DESTINATION + train.STATION
             return lastIndexMap[key] === index
         }))
+
         return (
             <div>
+                <Stations line={filterTrains[0].LINE} />
                 <p> {filterTrains.length} </p>
                 {
                     filterTrains.map((train) => {
