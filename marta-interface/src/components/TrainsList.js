@@ -44,42 +44,31 @@ export default function TrainsList( {trainsList, stationsList} ) {
         }
 
         // filters for buttons clicked
-        if (arriving) {
-            filterTrains = filterTrains.filter((train) => {
-                return train.WAITING_TIME === "Arriving"
-            })
-        }
 
-        if (scheduled) {
-            filterTrains = filterTrains.filter((train) => {
-                return train.WAITING_TIME !== "Arriving"
-            })
-        }
+        filterTrains = filterTrains.filter((train) => {
+            if ((!arriving && !scheduled) || (arriving && scheduled)) {
+                return true;
+            } else {
+                return  (arriving ? train.WAITING_TIME === "Arriving" : train.WAITING_TIME !== "Arriving")
+            }
+        })
 
-        if (northbound) {
-            filterTrains = filterTrains.filter((train) => {
-                return train.DIRECTION === "N"
-            })
-        }
+        filterTrains = filterTrains.filter((train) => {
+            if ((!northbound && !southbound) || (northbound && southbound)) {
+                return true;
+            } else {
+                return  (northbound ? train.DIRECTION === "N" : train.DIRECTTION === "S")
+            }
+        })
 
-        if (southbound) {
-            filterTrains = filterTrains.filter((train) => {
-                return train.DIRECTION === "S"
-            })
-        }
-
-        if (eastbound) {
-            filterTrains = filterTrains.filter((train) => {
-                return train.DIRECTION === "E"
-            })
-        }
-
-        if (westbound) {
-            filterTrains = filterTrains.filter((train) => {
-                return train.DIRECTION === "W"
-            })
-        }
-
+        filterTrains = filterTrains.filter((train) => {
+            if ((!eastbound && !westbound) || (eastbound && westbound)) {
+                return true;
+            } else {
+                return  (eastbound ? train.DIRECTION === "E" : train.DIRECTION === "W")
+            }
+        })
+        
         // Toggle click functions
 
         const toggleArriving = (() => {
@@ -109,28 +98,27 @@ export default function TrainsList( {trainsList, stationsList} ) {
         const line = trains[0].LINE
 
         return (
-            <div className='flex flex-col'>
-                { (line === "GOLD" || line === "RED") && (
-                    <div className='flex flex-row justify-around items-center m-2'>
-                        <button onClick={toggleArriving}> Arriving </button>
-                        <button onClick={toggleScheduled}> Scheduled </button>
-                        <button onClick={toggleNorthbound}> Northbound </button>
-                        <button onClick={toggleSouthbound}> Southbound </button>
-                    </div>
-                )}
+            <div className="flex">
+                <Stations stations={stationsList} setCurrStation={setCurrStation}/>
+                <div className='flex flex-col flex-grow'>
+                    { (line === "GOLD" || line === "RED") && (
+                        <div className='flex flex-row justify-around items-center mx-2 text-white my-3'>
+                            <button className={arriving ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleArriving}> Arriving </button>
+                            <button className={scheduled ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleScheduled}> Scheduled </button>
+                            <button className={northbound ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleNorthbound}> Northbound </button>
+                            <button className={southbound ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleSouthbound}> Southbound </button>
+                        </div>
+                    )}
 
-                { (line === "BLUE" || line === "GREEN") && (
-                    <div className='flex flex-row justify-around items-cente m-2'>
-                        <button onClick={toggleArriving}> Arriving </button>
-                        <button onClick={toggleScheduled}> Scheduled </button>
-                        <button onClick={toggleEastbound}> Eastbound </button>
-                        <button onClick={toggleWestbound}> Westbound </button>
-                    </div>
-                )}
-
-                <div className="flex">
-                    <Stations stations={stationsList} setCurrStation={setCurrStation}/>
-                    <div className="flex-grow">
+                    { (line === "BLUE" || line === "GREEN") && (
+                        <div className='flex flex-row justify-around items-center text-white mx-2 my-3'>
+                            <button className={arriving ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleArriving}> Arriving </button>
+                            <button className={scheduled ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleScheduled}> Scheduled </button>
+                            <button className={eastbound ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleEastbound}> Eastbound </button>
+                            <button className={westbound ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleWestbound}> Westbound </button>
+                        </div>
+                    )}
+                    <div>
                         {
                             filterTrains.map((train) => {
                                 return ( <Train train={train} /> )

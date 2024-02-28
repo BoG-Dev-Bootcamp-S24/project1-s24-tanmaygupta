@@ -34,7 +34,7 @@ function LinesPages() {
     }
 
     useEffect( () => {
-        fetchData("gold")
+        fetchData("blue")
     }, [])
 
     return (
