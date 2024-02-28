@@ -1,7 +1,7 @@
 import Stations from "./Stations";
 import Train from "./Train";
 
-export default function TrainsList( {trainsList, stations} ) {
+export default function TrainsList( {trainsList, stationsList} ) {
 
     const trains = trainsList
 
@@ -26,14 +26,15 @@ export default function TrainsList( {trainsList, stations} ) {
         }))
 
         return (
-            <div>
-                <Stations line={filterTrains[0].LINE} />
-                <p> {filterTrains.length} </p>
-                {
-                    filterTrains.map((train) => {
-                        return ( <Train train={train} /> ) //map to print all unique trains
-                    })
-                }
+            <div className="flex">
+                <Stations stations={stationsList} />
+                <div>
+                    {
+                        filterTrains.map((train) => {
+                            return ( <Train train={train} /> ) //map to print all unique trains
+                        })
+                    }
+                </div>
             </div>
         )
     }

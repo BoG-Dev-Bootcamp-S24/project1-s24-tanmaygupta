@@ -10,19 +10,19 @@ function LinesPages() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    async function fetchTrains(color) {
+    async function fetchData(color) {
         try {
-            let response = await fetch(API_URL + `arrivals/${color}`);
-            if (!response.ok) {
+            const trainsResponse = await fetch(API_URL + `arrivals/${color}`);
+            const stationsResponse = await fetch(API_URL + `stations/${color}`);
+            if (!trainsResponse.ok) {
                 throw Error("Problem in fetching data");
             }
-            const newData = await response.json();
-            setData(newData);
-            response = await fetch(API_URL + `stations/${color}`);
-            if (!response.ok) {
+            if (!stationsResponse.ok) {
                 throw Error("Problem fetching stations");
             }
-            const newStations = await response.json();
+            const newData = await trainsResponse.json();
+            setData(newData);
+            const newStations = await stationsResponse.json();
             setStations(newStations)
             setError(null);
             setLoading(false);
@@ -34,14 +34,14 @@ function LinesPages() {
     }
 
     useEffect( () => {
-        fetchTrains("red")
+        fetchData("blue")
     }, [])
 
     return (
         <div className="lines-page">
             { error && <p> Error occurred </p>}
             { loading && <h1 className='text-2xl font-bold flex p-10'> Loading... </h1>}
-            { data && <TrainsList trainsList={data} stations={stations} />}
+            { data && <TrainsList trainsList={data} stationsList={stations} />}
         </div>
     )
 }
