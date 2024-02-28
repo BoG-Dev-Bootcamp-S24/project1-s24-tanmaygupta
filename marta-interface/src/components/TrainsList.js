@@ -10,6 +10,8 @@ export default function TrainsList( {trainsList, stationsList} ) {
     const [scheduled, setScheduled] = useState(false);
     const [northbound, setNorthbound] = useState(false);
     const [southbound, setSouthbound] = useState(false);
+    const [eastbound, setEastbound] = useState(false);
+    const [westbound, setWestbound] = useState(false);
 
     if (trains.length === 0) {
         return (
@@ -66,6 +68,18 @@ export default function TrainsList( {trainsList, stationsList} ) {
             })
         }
 
+        if (eastbound) {
+            filterTrains = filterTrains.filter((train) => {
+                return train.DIRECTION === "E"
+            })
+        }
+
+        if (westbound) {
+            filterTrains = filterTrains.filter((train) => {
+                return train.DIRECTION === "W"
+            })
+        }
+
         // Toggle click functions
 
         const toggleArriving = (() => {
@@ -84,6 +98,14 @@ export default function TrainsList( {trainsList, stationsList} ) {
             setSouthbound(!southbound);
         }) 
 
+        const toggleEastbound = (() => {
+            setEastbound(!eastbound);
+        }) 
+
+        const toggleWestbound = (() => {
+            setWestbound(!westbound);
+        }) 
+
         const line = trains[0].LINE
 
         return (
@@ -94,6 +116,13 @@ export default function TrainsList( {trainsList, stationsList} ) {
                     <div>
                         <button onClick={toggleNorthbound}> Northbound </button>
                         <button onClick={toggleSouthbound}> Southbound </button>
+                    </div>
+                )}
+
+                { (line === "BLUE" || line === "GREEN") && (
+                    <div>
+                        <button onClick={toggleEastbound}> Eastbound </button>
+                        <button onClick={toggleWestbound}> Westbound </button>
                     </div>
                 )}
 
