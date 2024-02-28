@@ -110,17 +110,19 @@ export default function TrainsList( {trainsList, stationsList} ) {
 
         return (
             <div className='flex flex-col'>
-                <button onClick={toggleArriving}> Arriving </button>
-                <button onClick={toggleScheduled}> Scheduled </button>
                 { (line === "GOLD" || line === "RED") && (
-                    <div>
+                    <div className='flex flex-row justify-around items-center m-2'>
+                        <button onClick={toggleArriving}> Arriving </button>
+                        <button onClick={toggleScheduled}> Scheduled </button>
                         <button onClick={toggleNorthbound}> Northbound </button>
                         <button onClick={toggleSouthbound}> Southbound </button>
                     </div>
                 )}
 
                 { (line === "BLUE" || line === "GREEN") && (
-                    <div>
+                    <div className='flex flex-row justify-around items-cente m-2'>
+                        <button onClick={toggleArriving}> Arriving </button>
+                        <button onClick={toggleScheduled}> Scheduled </button>
                         <button onClick={toggleEastbound}> Eastbound </button>
                         <button onClick={toggleWestbound}> Westbound </button>
                     </div>
