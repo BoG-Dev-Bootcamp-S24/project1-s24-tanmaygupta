@@ -8,6 +8,8 @@ export default function TrainsList( {trainsList, stationsList} ) {
     const [currStation, setCurrStation] = useState(null);
     const [arriving, setArriving] = useState(false);
     const [scheduled, setScheduled] = useState(false);
+    const [northbound, setNorthbound] = useState(false);
+    const [southbound, setSouthbound] = useState(false);
 
     if (trains.length === 0) {
         return (
@@ -20,15 +22,18 @@ export default function TrainsList( {trainsList, stationsList} ) {
     } else {
         const lastIndexMap = {};
 
+        // filter to only include latest data
         trains.forEach((train, index) => {
             const key = train.DESTINATION + train.STATION
             lastIndexMap[key] = index;
         })
-        let filterTrains = (trains.filter((train, index) => { //filter to only include latest data
+
+        let filterTrains = (trains.filter((train, index) => { 
             const key = train.DESTINATION + train.STATION
             return lastIndexMap[key] === index
         }))
 
+        // filter by station clicked
         if (currStation !== null) {
             filterTrains = filterTrains.filter((train) => {
                 return train.STATION.includes(currStation.toUpperCase());
@@ -36,6 +41,7 @@ export default function TrainsList( {trainsList, stationsList} ) {
             console.log(filterTrains);
         }
 
+        // filters for buttons clicked
         if (arriving) {
             filterTrains = filterTrains.filter((train) => {
                 return train.WAITING_TIME === "Arriving"
@@ -48,6 +54,20 @@ export default function TrainsList( {trainsList, stationsList} ) {
             })
         }
 
+        if (northbound) {
+            filterTrains = filterTrains.filter((train) => {
+                return train.DIRECTION === "N"
+            })
+        }
+
+        if (southbound) {
+            filterTrains = filterTrains.filter((train) => {
+                return train.DIRECTION === "S"
+            })
+        }
+
+        // Toggle click functions
+
         const toggleArriving = (() => {
             setArriving(!arriving);
         }) 
@@ -56,10 +76,27 @@ export default function TrainsList( {trainsList, stationsList} ) {
             setScheduled(!scheduled);
         })
 
+        const toggleNorthbound = (() => {
+            setNorthbound(!northbound);
+        }) 
+
+        const toggleSouthbound = (() => {
+            setSouthbound(!southbound);
+        }) 
+
+        const line = trains[0].LINE
+
         return (
             <div className='flex flex-col'>
-                <button className="" onClick={toggleArriving}> Arriving </button>
+                <button onClick={toggleArriving}> Arriving </button>
                 <button onClick={toggleScheduled}> Scheduled </button>
+                { (line === "GOLD" || line === "RED") && (
+                    <div>
+                        <button onClick={toggleNorthbound}> Northbound </button>
+                        <button onClick={toggleSouthbound}> Southbound </button>
+                    </div>
+                )}
+
                 <div className="flex">
                     <Stations stations={stationsList} setCurrStation={setCurrStation}/>
                     <div className="flex-grow">
