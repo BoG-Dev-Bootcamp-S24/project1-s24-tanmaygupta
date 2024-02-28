@@ -1,4 +1,4 @@
-export default function Stations( {stations, setCurrStation} ) {
+export default function Stations( {stations, setCurrStation, currStation} ) {
 
     function clicked(station) {
         if (station === "Hamilton E. Holmes") {
@@ -13,12 +13,13 @@ export default function Stations( {stations, setCurrStation} ) {
         setCurrStation(station);
     }
 
+
     return (
-        <div className="text-white bg-slate-800 p-10 flex flex-col text-lg">
-            <button onClick={() => clicked(null)}> All Stations </button>
+        <div className="text-white bg-slate-800 flex flex-col text-lg">
+            <button className={currStation === null ? "text-lg w-100 px-10 py-3 bg-slate-700" : "text-lg mx-10 my-3"} onClick={() => clicked(null)}> All Stations </button>
             {stations.map((station) => {
                 return (
-                    <button className="text-lg mt-3" onClick={() => clicked(station)}> {station} </button>
+                    <button className={currStation === station ? "text-lg w-100 px-10 py-3 bg-slate-700" : "text-lg mx-10 my-3"} onClick={() => clicked(station)}> {station} </button>
                 )
             })}
         </div>

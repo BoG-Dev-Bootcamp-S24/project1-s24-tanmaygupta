@@ -57,7 +57,7 @@ export default function TrainsList( {trainsList, stationsList} ) {
             if ((!northbound && !southbound) || (northbound && southbound)) {
                 return true;
             } else {
-                return  (northbound ? train.DIRECTION === "N" : train.DIRECTTION === "S")
+                return  (northbound ? train.DIRECTION === "N" : train.DIRECTION === "S")
             }
         })
 
@@ -68,7 +68,7 @@ export default function TrainsList( {trainsList, stationsList} ) {
                 return  (eastbound ? train.DIRECTION === "E" : train.DIRECTION === "W")
             }
         })
-        
+
         // Toggle click functions
 
         const toggleArriving = (() => {
@@ -99,23 +99,23 @@ export default function TrainsList( {trainsList, stationsList} ) {
 
         return (
             <div className="flex">
-                <Stations stations={stationsList} setCurrStation={setCurrStation}/>
+                <Stations stations={stationsList} setCurrStation={setCurrStation} currStation={currStation}/>
                 <div className='flex flex-col flex-grow'>
                     { (line === "GOLD" || line === "RED") && (
                         <div className='flex flex-row justify-around items-center mx-2 text-white my-3'>
-                            <button className={arriving ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleArriving}> Arriving </button>
-                            <button className={scheduled ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleScheduled}> Scheduled </button>
-                            <button className={northbound ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleNorthbound}> Northbound </button>
-                            <button className={southbound ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleSouthbound}> Southbound </button>
+                            <button className={arriving ? 'rounded-md bg-green-600 shadow-md px-5 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-5 py-1'} onClick={toggleArriving}> Arriving </button>
+                            <button className={scheduled ? 'rounded-md bg-green-600 shadow-md px-5 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-5 py-1'} onClick={toggleScheduled}> Scheduled </button>
+                            <button className={northbound ? 'rounded-md bg-green-600 shadow-md px-5 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-5 py-1'} onClick={toggleNorthbound}> Northbound </button>
+                            <button className={southbound ? 'rounded-md bg-green-600 shadow-md px-5 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-5 py-1'} onClick={toggleSouthbound}> Southbound </button>
                         </div>
                     )}
 
                     { (line === "BLUE" || line === "GREEN") && (
                         <div className='flex flex-row justify-around items-center text-white mx-2 my-3'>
-                            <button className={arriving ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleArriving}> Arriving </button>
-                            <button className={scheduled ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleScheduled}> Scheduled </button>
-                            <button className={eastbound ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleEastbound}> Eastbound </button>
-                            <button className={westbound ? 'rounded-md bg-green-600 shadow-md px-4 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-4 py-1'} onClick={toggleWestbound}> Westbound </button>
+                            <button className={arriving ? 'rounded-md bg-green-600 shadow-md px-5 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-5 py-1'} onClick={toggleArriving}> Arriving </button>
+                            <button className={scheduled ? 'rounded-md bg-green-600 shadow-md px-5 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-5 py-1'} onClick={toggleScheduled}> Scheduled </button>
+                            <button className={eastbound ? 'rounded-md bg-green-600 shadow-md px-5 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-5 py-1'} onClick={toggleEastbound}> Eastbound </button>
+                            <button className={westbound ? 'rounded-md bg-green-600 shadow-md px-5 py-1 transform transition-transform scale-105' : 'rounded-md bg-slate-800 px-5 py-1'} onClick={toggleWestbound}> Westbound </button>
                         </div>
                     )}
                     <div>
