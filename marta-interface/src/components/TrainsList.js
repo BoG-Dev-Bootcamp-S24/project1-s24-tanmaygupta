@@ -27,8 +27,8 @@ export default function TrainsList( {trainsList, stationsList} ) {
 
         return (
             <div className="flex">
-                <Stations stations={stationsList} />
-                <div>
+                <Stations stations={stationsList}/>
+                <div className="flex-grow">
                     {
                         filterTrains.map((train) => {
                             return ( <Train train={train} /> ) //map to print all unique trains

@@ -23,7 +23,7 @@ export default function Train( {train} ) {
                 <p> {train.STATION} --{'>'} {train.DESTINATION} </p>
                 <div className="flex flex-row font-semibold">
                     <div className={`w-16 mr-10 rounded-md ${background}`}> <p className={`text-white`}> {train.LINE} </p> </div>
-                    {train.DELAY_TIME === "T0S" ? <p className="text-green-500"> On Time </p> : <p className="text-red-500"> Delayed </p>}
+                    {train.DELAY_TIME === "T0S" ? <p className="text-green-500"> On Time </p> : <p className="text-red-500 italic"> Delayed </p>}
                 </div>
             </div>
             <p className="flex items-center ml-20"> {train.WAITING_TIME} </p>

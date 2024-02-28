@@ -1,14 +1,10 @@
-import { useState } from "react"
-
-const API_URL = "https://midsem-bootcamp-api.onrender.com/";
-
 export default function Stations( {stations} ) {
     return (
-        <div>
+        <div className=" text-white bg-slate-800 p-10">
             <p> All Stations </p>
             {stations.map((station) => {
                 return (
-                    <p> {station} </p>
+                    <p className="text-xl "> {station} </p>
                 )
             })}
         </div>

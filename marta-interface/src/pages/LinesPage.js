@@ -5,7 +5,7 @@ const API_URL = "https://midsem-bootcamp-api.onrender.com/";
 
 function LinesPages() {
 
-    const [data, setData] = useState(null);
+    const [trains, setTrains] = useState(null);
     const [stations, setStations] = useState(null)
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -20,8 +20,8 @@ function LinesPages() {
             if (!stationsResponse.ok) {
                 throw Error("Problem fetching stations");
             }
-            const newData = await trainsResponse.json();
-            setData(newData);
+            const newTrains = await trainsResponse.json();
+            setTrains(newTrains);
             const newStations = await stationsResponse.json();
             setStations(newStations)
             setError(null);
@@ -41,7 +41,7 @@ function LinesPages() {
         <div className="lines-page">
             { error && <p> Error occurred </p>}
             { loading && <h1 className='text-2xl font-bold flex p-10'> Loading... </h1>}
-            { data && <TrainsList trainsList={data} stationsList={stations} />}
+            { trains && stations && <TrainsList trainsList={trains} stationsList={stations} />}
         </div>
     )
 }
