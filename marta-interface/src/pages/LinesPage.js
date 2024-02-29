@@ -43,7 +43,7 @@ function LinesPages() {
         <div className="lines-page">
             <NavBar line={line} setLine={setLine} setLoading={setLoading}/>
             { error && <p> Error occurred </p>}
-            { !loading && trains && stations ? <TrainsList trainsList={trains} stationsList={stations} /> : <h1 className='text-5xl font-bold flex p-10 justify-center'> Loading... </h1>}
+            { !loading ? <TrainsList trainsList={trains} stationsList={stations} line={line}/> : <h1 className='text-5xl font-bold flex mt-20 p-10 justify-center'> Loading... </h1>}
         </div>
     )
 }

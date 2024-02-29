@@ -6,7 +6,6 @@ import LinesPages from './pages/LinesPage';
 function App() {
   return (
       <div className="App">
-        
         <LinesPages />
       </div>
   );

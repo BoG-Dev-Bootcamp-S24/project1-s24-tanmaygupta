@@ -17,7 +17,7 @@ export default function Train( {train} ) {
     }
 
     return (
-        <div className={`flex justify-start py-8 ${border} border-2`}>
+        <div className={`flex justify-start py-8 ${border} border-b-4`}>
             <p className="ml-6 w-10 text-5xl font-extrabold"> {train.STATION[0]} </p>
             <div className="flex flex-col w-auto ml-16 items-start font-semibold">
                 <p> {train.STATION} --{'>'} {train.DESTINATION} </p>
