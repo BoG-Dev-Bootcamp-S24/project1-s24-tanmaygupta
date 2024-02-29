@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import TrainsList from '../components/TrainsList';
+import NavBar from '../components/NavBar';
 
 const API_URL = "https://midsem-bootcamp-api.onrender.com/";
 
 function LinesPages() {
 
+    const [line, setLine] = useState(null);
     const [trains, setTrains] = useState(null);
     const [stations, setStations] = useState(null)
     const [error, setError] = useState(null);
@@ -34,14 +36,14 @@ function LinesPages() {
     }
 
     useEffect( () => {
-        fetchData("red")
-    }, [])
+        fetchData(line)
+    }, [line])
 
     return (
         <div className="lines-page">
+            <NavBar line={line} setLine={setLine} setLoading={setLoading}/>
             { error && <p> Error occurred </p>}
-            { loading && <h1 className='text-2xl font-bold flex p-10'> Loading... </h1>}
-            { trains && stations && <TrainsList trainsList={trains} stationsList={stations} />}
+            { !loading && trains && stations ? <TrainsList trainsList={trains} stationsList={stations} /> : <h1 className='text-5xl font-bold flex p-10 justify-center'> Loading... </h1>}
         </div>
     )
 }
