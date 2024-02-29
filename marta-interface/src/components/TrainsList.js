@@ -16,12 +16,12 @@ export default function TrainsList( {trainsList, stationsList, line} ) {
     const lastIndexMap = {};
     // filter to only include latest data
     trains.forEach((train, index) => {
-        const key = train.DESTINATION + train.STATION
+        const key = train.STATION + train.DESTINATION;
         lastIndexMap[key] = index;
     })
 
     let filterTrains = (trains.filter((train, index) => { 
-        const key = train.DESTINATION + train.STATION
+        const key = train.STATION + train.DESTINATION;
         return lastIndexMap[key] === index
     }))
 
@@ -95,7 +95,6 @@ export default function TrainsList( {trainsList, stationsList, line} ) {
     function displayTrains() {
         return (
             <div>
-                
                 { filterTrains.map((train) => {
                     return ( <Train train={train} /> )
                 }) }

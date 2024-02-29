@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom"
+
 export default function NavBar( {line, setLine, setLoading} ) {
+
+    const navigate = useNavigate();
 
     let lineColor = "";
     if (line === "gold") {
@@ -11,9 +15,13 @@ export default function NavBar( {line, setLine, setLoading} ) {
         lineColor = "border-y-green-500"
     }
 
-    function clickLine(line) {
-        setLine(line);
-        setLoading(true);
+    function clickLine(clickLine) {
+        if (line !== clickLine) {
+            setLine(clickLine);
+            setLoading(true);
+        } else {
+            setLine(clickLine);
+        }
     }
 
     return (
@@ -24,7 +32,7 @@ export default function NavBar( {line, setLine, setLoading} ) {
                 <button className={line === "blue" ? 'rounded-md bg-blue-500 shadow-md px-10 py-1 transform transition-transform scale-105' : 'rounded-md border-2 border-blue-500 px-10 py-1'} onClick={() => clickLine("blue")}> Blue </button>
                 <button className={line === "green" ? 'rounded-md bg-green-500 shadow-md px-10 py-1 transform transition-transform scale-105' : 'rounded-md border-2 border-green-500 px-10 py-1'} onClick={() => clickLine("green")}> Green </button>
             </nav>
-            <div className={`border-y-4 ${lineColor} py-2 mt-2 font-extrabold`}>
+            <div className={`border-y-4 ${lineColor} py-2 mt-2 font-extrabold text-center`}>
                 <h1 className="text-5xl"> {line === null ? "SELECT LINE" : line.toUpperCase()} </h1>
             </div>
         </div>
