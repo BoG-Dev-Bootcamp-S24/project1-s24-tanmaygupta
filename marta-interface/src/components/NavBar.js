@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
-export default function NavBar( {line, setLine, setLoading} ) {
+export default function NavBar( {line} ) {
 
     const navigate = useNavigate();
 
@@ -16,15 +16,8 @@ export default function NavBar( {line, setLine, setLoading} ) {
     }
 
     function clickLine(clickLine) {
-        // if (line !== clickLine) {
-        //     setLine(clickLine);
-        //     setLoading(true);
-        // } else {
-        //     setLine(clickLine);
-        // }
         if (line !== clickLine) {
             navigate(`/linespage/${clickLine}`);
-            setLine(clickLine);
         }
     }
 

@@ -4,9 +4,8 @@ import NavBar from '../components/NavBar';
 
 const API_URL = "https://midsem-bootcamp-api.onrender.com/";
 
-function LinesPages() {
+function LinesPages( {line} ) {
 
-    const [line, setLine] = useState(null);
     const [trains, setTrains] = useState(null);
     const [stations, setStations] = useState(null)
     const [error, setError] = useState(null);
@@ -58,7 +57,7 @@ function LinesPages() {
 
     return (
         <div className="lines-page">
-            <NavBar line={line} setLine={setLine} setLoading={setLoading}/>
+            <NavBar line={line}/>
             { error && <p> Error occurred </p>}
             { !loading ? <TrainsList trainsList={trains} stationsList={stations} line={line} loading={loading} setLoading={setLoading}/> : displayLoading()}
         </div>
