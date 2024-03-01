@@ -26,7 +26,7 @@ export default function Train( {train} ) {
                     {train.DELAY_TIME === "T0S" ? <p className="text-green-500"> On Time </p> : <p className="text-red-500 italic"> Delayed </p>}
                 </div>
             </div>
-            <p className="flex items-center ml-20"> {train.WAITING_TIME} </p>
+            <p className={train.WAITING_TIME === "Arriving" ? `flex items-center ml-auto mr-20 text-2xl text-green-500 font-bold` : `flex items-center ml-auto mr-20 text-xl`}> {train.WAITING_TIME} </p>
         </div>
     )
 }

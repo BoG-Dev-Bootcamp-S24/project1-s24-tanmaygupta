@@ -21,8 +21,9 @@ export default function NavBar( {line} ) {
         }
     }
 
-    return (
-        <div className="flex flex-col">
+    function display() {
+        return (
+            <div className="flex flex-col">
             <nav className="flex flex-row justify-around h-14 items-center">
                 <button className={line === "gold" ? 'rounded-md bg-yellow-500 shadow-md px-10 py-1 transform transition-transform scale-105' : 'rounded-md border-2 border-yellow-500 px-10 py-1'} onClick={() => clickLine("gold")}> Gold </button>
                 <button className={line === "red" ? 'rounded-md bg-red-500 shadow-md px-10 py-1 transform transition-transform scale-105' : 'rounded-md border-2 border-red-500 px-10 py-1'} onClick={() => clickLine("red")}> Red </button>
@@ -32,6 +33,13 @@ export default function NavBar( {line} ) {
             <div className={`border-y-4 ${lineColor} py-2 mt-2 font-extrabold text-center`}>
                 <h1 className="text-5xl"> {line === null ? "SELECT LINE" : line.toUpperCase()} </h1>
             </div>
+        </div>
+        )
+    }
+
+    return (
+        <div>
+            {display()}
         </div>
     )
 }

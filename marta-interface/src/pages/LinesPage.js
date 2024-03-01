@@ -49,6 +49,20 @@ function LinesPages( {line} ) {
         fetchData(line)
     }, [line])
 
+    // useEffect(() => {
+
+    //     setLoading(true);
+    //     fetchData(line);
+
+    //     // Fetch data every 10 seconds
+    //     const interval = setInterval(() => {
+    //         fetchData(line);
+    //     }, 10000);
+
+    //     // Cleanup function to clear the interval when component unmounts or when line changes
+    //     return () => clearInterval(interval);
+    // }, [line]);
+
     function displayLoading() {
         return (
             <h1 className='text-5xl font-bold flex mt-20 p-10 justify-center'> Loading... </h1>
@@ -57,9 +71,9 @@ function LinesPages( {line} ) {
 
     return (
         <div className="lines-page">
-            <NavBar line={line}/>
+            <NavBar line={line} loading={loading}/>
             { error && <p> Error occurred </p>}
-            { !loading ? <TrainsList trainsList={trains} stationsList={stations} line={line} loading={loading} setLoading={setLoading}/> : displayLoading()}
+            { !loading ? <TrainsList trainsList={trains} stationsList={stations} line={line}/> : displayLoading()}
         </div>
     )
 }

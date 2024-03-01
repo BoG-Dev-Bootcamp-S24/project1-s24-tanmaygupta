@@ -15,7 +15,6 @@ export default function TrainsList({ trainsList, stationsList, line }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Filter trains when trainsList or other dependencies change
         if (trainsList.length > 0) {
             filterTrains();
             setLoading(false);
