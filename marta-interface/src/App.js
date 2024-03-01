@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LinesPages from './pages/LinesPage';
-import HomePage from './pages/HomePage';
-import AboutMarta from './pages/AboutMarta';
+import HomePage from './pages/Home';
+import AboutMarta from './pages/About';
 
 function App() {
   return (

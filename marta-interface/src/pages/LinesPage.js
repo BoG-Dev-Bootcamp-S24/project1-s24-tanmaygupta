@@ -57,7 +57,7 @@ function LinesPages( {line} ) {
     //     // Fetch data every 10 seconds
     //     const interval = setInterval(() => {
     //         fetchData(line);
-    //     }, 10000);
+    //     }, 20000);
 
     //     // Cleanup function to clear the interval when component unmounts or when line changes
     //     return () => clearInterval(interval);
