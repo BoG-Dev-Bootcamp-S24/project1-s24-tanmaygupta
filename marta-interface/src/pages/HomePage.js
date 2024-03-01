@@ -10,10 +10,12 @@ export default function HomePage() {
             <nav className="flex justify-end">
                 <button onClick={() => navigate("/linespage/gold")}> About Marta </button>
             </nav>
-            <div>
-                <h1> Welcome to the MARTA Interface </h1>
+            <div className="flex flex-row">
+                <div>
+                    <h1> Welcome to the MARTA Interface </h1>
+                </div>
+                <img className="w-20" src={goldImage} alt="Gold Page image"></img>
             </div>
-            <img className="w-20" src={goldImage} alt="Gold Page image"></img>
         </div>
     )
 }

@@ -16,10 +16,14 @@ export default function NavBar( {line, setLine, setLoading} ) {
     }
 
     function clickLine(clickLine) {
+        // if (line !== clickLine) {
+        //     setLine(clickLine);
+        //     setLoading(true);
+        // } else {
+        //     setLine(clickLine);
+        // }
         if (line !== clickLine) {
-            setLine(clickLine);
-            setLoading(true);
-        } else {
+            navigate(`/linespage/${clickLine}`);
             setLine(clickLine);
         }
     }

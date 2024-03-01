@@ -14,16 +14,27 @@ function LinesPages() {
 
     async function fetchData(color) {
         try {
+            setLoading(true);
             const trainsResponse = await fetch(API_URL + `arrivals/${color}`);
-            const stationsResponse = await fetch(API_URL + `stations/${color}`);
             if (!trainsResponse.ok) {
                 throw Error("Problem in fetching data");
             }
+            let newTrains = await trainsResponse.json();
+            const lastIndexMap = {};
+            newTrains.forEach((train, index) => {
+                const key = train.STATION + train.DESTINATION;
+                lastIndexMap[key] = index;
+            });
+
+            newTrains = newTrains.filter((train, index) => {
+                const key = train.STATION + train.DESTINATION;
+                return lastIndexMap[key] === index;
+            });
+            setTrains(newTrains);
+            const stationsResponse = await fetch(API_URL + `stations/${color}`);
             if (!stationsResponse.ok) {
                 throw Error("Problem fetching stations");
             }
-            const newTrains = await trainsResponse.json();
-            setTrains(newTrains);
             const newStations = await stationsResponse.json();
             setStations(newStations)
             setError(null);
@@ -39,11 +50,17 @@ function LinesPages() {
         fetchData(line)
     }, [line])
 
+    function displayLoading() {
+        return (
+            <h1 className='text-5xl font-bold flex mt-20 p-10 justify-center'> Loading... </h1>
+        )
+    }
+
     return (
         <div className="lines-page">
             <NavBar line={line} setLine={setLine} setLoading={setLoading}/>
             { error && <p> Error occurred </p>}
-            { !loading ? <TrainsList trainsList={trains} stationsList={stations} line={line}/> : <h1 className='text-5xl font-bold flex mt-20 p-10 justify-center'> Loading... </h1>}
+            { !loading ? <TrainsList trainsList={trains} stationsList={stations} line={line} loading={loading} setLoading={setLoading}/> : displayLoading()}
         </div>
     )
 }
